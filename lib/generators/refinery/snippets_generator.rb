@@ -1,6 +1,11 @@
 module Refinery
   class SnippetsGenerator < Rails::Generators::Base
-    
+
+    def generate_snippets_initializer
+      template "config/initializers/refinery/snippets.rb.erb", File.join(destination_root, "config", "initializers", "refinery", "snippets.rb")
+      template "config/initializers/globalize_papertrail_fix.rb", File.join(destination_root, "config", "initializers", "refinery", "globalize_papertrail_fix.rb")
+    end
+        
     def rake_db
       rake("refinery_snippets:install:migrations")
     end

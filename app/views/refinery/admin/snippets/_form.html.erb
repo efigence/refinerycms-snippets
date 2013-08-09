@@ -33,3 +33,55 @@
                 :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @snippet.title)
               } %>
 <% end -%>
+
+<% if Refinery::Snippets.config.enable_versioning %>
+
+  <% st = @snippet.translations.where(:locale => params[:switch_locale] || params[:locale]).first %>
+  <% if st %>
+    <% @translation_versions = st.versions.unscoped.where(:item_id => st.id, :item_type => st.class.to_s).paginate(:page => (params[:page] || 1), :per_page => 10, :order => 'created_at DESC, id DESC') %>
+    
+    <% unless @translation_versions.first.reify.blank? %>
+      <h5 style="color: #bcbcbc;">
+        <%= t('refinery.admin.snippets.snippet.past_versions') -%>
+      </h5>
+    <% end %>
+    
+    <% @translation_versions.all.each_with_index do |v, idx| %>
+      <% reified = v.reify %>
+      <% unless reified.blank? %>
+
+        <%# BOOTSTRAP %>
+        <div class="accordion-inner">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="badges span12">
+
+                <span class="badge badge-info" style="background-color: #22a7f2;" data-toggle="collapse" data-target=".info<%= idx -%>">
+                  <%= reified.updated_at %>
+                  &nbsp;
+                  <i class="icon-info-sign icon-white"></i>
+                </span>
+
+                <% @snippet.class.translated_attribute_names.each do |a| %>
+                  <div class="info<%= idx -%> collapse">
+                    <div style="padding: 10px;">
+                      <%= reified.send(a) %>
+                    </div>
+                  </div>
+                <% end %>
+                              
+               </div>
+             </div>     
+           </div>
+        </div>
+             
+      <% end %>
+    <% end %>
+
+  <%= will_paginate @translation_versions %> 
+
+  <%= stylesheet_link_tag('bootstrap') %>
+  <%= javascript_include_tag 'bootstrap.js' %>
+  
+  <% end %>
+<% end %>
