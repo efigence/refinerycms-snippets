@@ -55,7 +55,7 @@ module Refinery
           tab.name = "snippets"
           tab.partial = "/refinery/admin/pages/tabs/snippets"
         end
-
+        
         Refinery.register_engine(Refinery::Snippets)
       end
     end

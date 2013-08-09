@@ -5,6 +5,7 @@ module Refinery
 
   module Snippets
     require 'refinery/snippets/engine' if defined?(Rails)
+    require 'refinery/snippets/configuration'
 
     autoload :Version, 'refinery/snippets/version'
     autoload :Tab, 'refinery/snippets/tabs'

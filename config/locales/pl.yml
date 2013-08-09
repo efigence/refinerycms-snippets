@@ -1,0 +1,47 @@
+pl:
+  refinery:
+    plugins:
+      refinery_snippets:
+        title: Fragmenty
+        description: Zarządzaj fragmentami
+        article: masculine
+    admin:
+      snippets:
+        actions:
+          create_new: Dodaj nowy Fragment
+          reorder: Zmień kolejność Fragmentów
+          reorder_done: Zatwierdź kolejność Fragmentów
+        records:
+          title: Fragmenty
+          sorry_no_results: Przepraszam! Nie znaleziono wyników.
+          no_items_yet: Nie ma jeszcze fragmentów. Kliknij "Dodaj nowy fragment" aby dodać swój pierwszy fragment.
+        snippet:
+          view_live_html: Zobacz ten Fragment na żywo <br/><em>(otwiera się w nowym oknie)</em>
+          edit: Edytuj ten fragment
+          delete: Usuń ten fragment na zawsze
+          past_versions: Poprzednie wersje
+      pages:
+        tabs:
+          snippets_content:
+            please_save_page_before: Należy zapisać tę stronę aby móc dodać jakiś fragment.
+          snippets_field:
+            active: Aktywny
+            inactive: Nieaktywny
+            add_after_body: Dodaj za body
+            add_before_body: Dodaj przed body
+            after_body: Za body
+            before_body: Przed body
+          snippets_list_item:
+            remove: Usuń
+            edit: Edytuj
+    snippets:
+      show:
+        other: Inne Fragmenty
+  activerecord:
+    models:
+      refinery/snippet: fragment
+      refinery/snippet_page_part: Asocjacja fragmentu
+    attributes:
+      refinery/snippet:
+        title: Tytuł
+

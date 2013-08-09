@@ -1,6 +1,6 @@
 module Refinery
   class Snippet < ActiveRecord::Base
-
+    
     TEMPLATES_DIR = "app/views/shared/snippets"
 
     attr_protected :id
@@ -9,7 +9,7 @@ module Refinery
 
     validates :title, :presence => true, :uniqueness => true
 
-    translates :body
+    translates :body, :versioning => Refinery::Snippets.config.enable_versioning
 
     has_many :snippet_page_parts, :dependent => :destroy
     has_many :page_parts, :through => :snippet_page_parts
